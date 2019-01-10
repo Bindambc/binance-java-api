@@ -1,4 +1,4 @@
-# Java Binance API
+# Java Binance API..
 
 binance-java-api is a lightweight Java library for interacting with the [Binance API](https://www.binance.com/restapipub.html), providing complete API coverage, and supporting synchronous and asynchronous requests, as well as event streaming using WebSockets.
 
