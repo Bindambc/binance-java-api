@@ -3,14 +3,14 @@ package com.binance.api.client.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * Order execution type.
+ * Ordenar tipo de execução.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum ExecutionType {
-  NEW,
-  CANCELED,
-  REPLACED,
-  REJECTED,
-  TRADE,
-  EXPIRED
+  NEW, // NOVO
+  CANCELED, // CANCELADO
+  REPLACED, // SUBSTITUÍDO
+  REJECTED, // REJEITADO
+  TRADE, // COMÉRCIO
+  EXPIRED // EXPIRADO
 }

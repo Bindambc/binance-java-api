@@ -47,12 +47,12 @@ public interface BinanceApiRestClient {
   Long getServerTime();
 
   /**
-   * @return Current exchange trading rules and symbol information
+   * @return Regras atuais de negociação de câmbio e informações sobre símbolos
    */
   ExchangeInfo getExchangeInfo();
 
   /**
-   * @return All the supported assets and whether or not they can be withdrawn.
+   * @return Todos os ativos suportados e se podem ou não ser retirados.
    */
   List<Asset> getAllAssets();
 
@@ -84,8 +84,8 @@ public interface BinanceApiRestClient {
   List<TradeHistoryItem> getHistoricalTrades(String symbol, Integer limit, Long fromId);
 
   /**
-   * Get compressed, aggregate trades. Trades that fill at the time, from the same order, with
-   * the same price will have the quantity aggregated.
+   * Obtenha negociações compactadas e agregadas. Negociações que são preenchidas no momento, da mesma ordem, com
+   * o mesmo preço terá a quantidade agregada.
    *
    * If both <code>startTime</code> and <code>endTime</code> are sent, <code>limit</code>should not
    * be sent AND the distance between <code>startTime</code> and <code>endTime</code> must be less than 24 hours.
@@ -100,14 +100,14 @@ public interface BinanceApiRestClient {
   List<AggTrade> getAggTrades(String symbol, String fromId, Integer limit, Long startTime, Long endTime);
 
   /**
-   * Return the most recent aggregate trades for <code>symbol</code>
+   * Retornar as negociações agregadas mais recentes para <code>symbol</code>
    *
    * @see #getAggTrades(String, String, Integer, Long, Long)
    */
   List<AggTrade> getAggTrades(String symbol);
 
   /**
-   * Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.
+   * Kline / barras de velas para um símbolo. Klines são identificados exclusivamente por seu tempo aberto.
    *
    * @param symbol symbol to aggregate (mandatory)
    * @param interval candlestick interval (mandatory)

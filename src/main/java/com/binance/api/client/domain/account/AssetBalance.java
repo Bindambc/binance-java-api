@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
- * An asset balance in an Account.
+ * Um saldo de ativos em uma conta
  *
  * @see Account
  */

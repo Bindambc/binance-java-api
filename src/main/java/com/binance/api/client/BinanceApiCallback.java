@@ -1,24 +1,24 @@
 package com.binance.api.client;
 
 /**
- * BinanceApiCallback is a functional interface used together with the BinanceApiAsyncClient to provide a non-blocking REST client.
+ * BinanceApiCallback é uma interface funcional usada junto com o BinanceApiAsyncClient para fornecer um cliente REST sem bloqueio.
  *
- * @param <T> the return type from the callback
+ * @param <T> o tipo de retorno do retorno de chamada
  */
 @FunctionalInterface
 public interface BinanceApiCallback<T> {
 
     /**
-     * Called whenever a response comes back from the Binance API.
-     *
-     * @param response the expected response object
+     * Chamado sempre que uma resposta retorna da API do Binance.
+     *
+     * @param response o objeto de resposta esperado
      */
     void onResponse(T response);
 
     /**
-     * Called whenever an error occurs.
-     *
-     * @param cause the cause of the failure
+     * Chamado sempre que ocorrer um erro.
+     *
+     * @param causa a causa da falha
      */
     default void onFailure(Throwable cause) {}
 }

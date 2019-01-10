@@ -37,278 +37,278 @@ public interface BinanceApiAsyncRestClient {
   // General endpoints
 
   /**
-   * Test connectivity to the Rest API.
+   * Teste a conectividade com a API Rest
    */
   void ping(BinanceApiCallback<Void> callback);
 
   /**
-   * Check server time.
+   * Verifique a hora do servidor.
    */
   void getServerTime(BinanceApiCallback<ServerTime> callback);
 
   /**
-   * Current exchange trading rules and symbol information
+   * Regras atuais de negociação de câmbio e informações sobre símbolos
    */
   void getExchangeInfo(BinanceApiCallback<ExchangeInfo> callback);
 
   /**
-   * ALL supported assets and whether or not they can be withdrawn.
+   * TODOS os ativos suportados e se podem ou não ser retirados
    */
   void getAllAssets(BinanceApiCallback<List<Asset>> callback);
 
   // Market Data endpoints
 
   /**
-   * Get order book of a symbol (asynchronous)
+   * Obter livro de pedidos de um símbolo (assíncrono)
    *
-   * @param symbol ticker symbol (e.g. ETHBTC)
-   * @param limit depth of the order book (max 100)
-   * @param callback the callback that handles the response
+   * @param símbolo ticker de símbolo (e.g. ETHBTC)
+   * @param limite de profundidade do livro de pedidos (max 100)
+   * @param chamar de volta o retorno de chamada que lida com a resposta
    */
   void getOrderBook(String symbol, Integer limit, BinanceApiCallback<OrderBook> callback);
 
   /**
-   * Get recent trades (up to last 500). Weight: 1
+   * Obter transações recentes (até o último 500). Peso: 1
    *
-   * @param symbol ticker symbol (e.g. ETHBTC)
-   * @param limit of last trades (Default 500; max 1000.)
-   * @param callback the callback that handles the response
+   * @param símbolo ticker de símbolo (e.g. ETHBTC)
+   * @param limite dos últimos negócios (Default 500; max 1000.)
+   * @param chamar de volta o retorno de chamada que lida com a resposta
    */
   void getTrades(String symbol, Integer limit, BinanceApiCallback<List<TradeHistoryItem>> callback);
 
   /**
-   * Get older trades. Weight: 5
+   * Obter comércios mais antigos. Peso: 5
    *
-   * @param symbol ticker symbol (e.g. ETHBTC)
-   * @param limit of last trades (Default 500; max 1000.)
-   * @param fromId TradeId to fetch from. Default gets most recent trades.
-   * @param callback the callback that handles the response
+   * @param symbol ticker symbol (por exemplo, ETHBTC)
+   * @param limite das últimas negociações (Padrão 500; máx. 1000.)
+   * @param fromId TradeId para buscar. Padrão recebe as negociações mais recentes.
+   * @param callback o retorno de chamada que lida com a resposta
    */
   void getHistoricalTrades(String symbol, Integer limit, Long fromId, BinanceApiCallback<List<TradeHistoryItem>> callback);
 
   /**
-   * Get compressed, aggregate trades. Trades that fill at the time, from the same order, with
-   * the same price will have the quantity aggregated.
-   *
-   * If both <code>startTime</code> and <code>endTime</code> are sent, <code>limit</code>should not
-   * be sent AND the distance between <code>startTime</code> and <code>endTime</code> must be less than 24 hours.
-   *
-   * @param symbol symbol to aggregate (mandatory)
-   * @param fromId ID to get aggregate trades from INCLUSIVE (optional)
-   * @param limit Default 500; max 1000 (optional)
-   * @param startTime Timestamp in ms to get aggregate trades from INCLUSIVE (optional).
-   * @param endTime Timestamp in ms to get aggregate trades until INCLUSIVE (optional).
-   * @param callback the callback that handles the response
-   * @return a list of aggregate trades for the given symbol
+   * Obtenha negociações compactadas e agregadas. Negociações que são preenchidas no momento, da mesma ordem, com
+   * o mesmo preço terá a quantidade agregada.
+   *
+   * Se ambos <code> startTime </ code> e <code> endTime </ code> forem enviados, <code> limit </ code> não deverá
+   * ser enviado E a distância entre <code> startTime </ code> e <code> endTime </ code> deve ser menor que 24 horas.
+   *
+   * símbolo de símbolo @param para agregar (obrigatório)
+   * @param fromId ID para obter transações agregadas de INCLUSIVE (opcional)
+   * @param limit Padrão 500; max 1000 (opcional)
+   * @param startTime Timestamp em ms para obter transações agregadas de INCLUSIVE (opcional).
+   * @param endTime Timestamp em ms para obter transações agregadas até INCLUSIVE (opcional).
+   * @param callback o retorno de chamada que lida com a resposta
+   * @retornar uma lista de negociações agregadas para o símbolo fornecido
    */
   void getAggTrades(String symbol, String fromId, Integer limit, Long startTime, Long endTime, BinanceApiCallback<List<AggTrade>> callback);
 
   /**
-   * Return the most recent aggregate trades for <code>symbol</code>
-   *
-   * @see #getAggTrades(String, String, Integer, Long, Long, BinanceApiCallback)
+   *	Retornar as negociações agregadas mais recentes para o <code>symbol</ code>
+   *
+   * @see #getAggTrades (String, String, Inteiro, Longo, Longo, BinanceApiCallback)
    */
   void getAggTrades(String symbol, BinanceApiCallback<List<AggTrade>> callback);
 
   /**
-   * Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.
-   *
-   * @param symbol symbol to aggregate (mandatory)
-   * @param interval candlestick interval (mandatory)
-   * @param limit Default 500; max 1000 (optional)
-   * @param startTime Timestamp in ms to get candlestick bars from INCLUSIVE (optional).
-   * @param endTime Timestamp in ms to get candlestick bars until INCLUSIVE (optional).
-   * @param callback the callback that handles the response containing a candlestick bar for the given symbol and interval
+   * Kline / barras de velas para um símbolo. Klines são identificados exclusivamente por seu tempo aberto.
+   *
+   * símbolo de símbolo @param para agregar (obrigatório)
+   * Intervalo de candlestick do intervalo @param (obrigatório)
+   * @param limit Padrão 500; max 1000 (opcional)
+   * @param startTime Timestamp em ms para obter barras de velas de INCLUSIVE (opcional).
+   * @param endTime Timestamp em ms para obter barras de castiçal até INCLUSIVE (opcional).
+   * @param callback o retorno de chamada que manipula a resposta contendo uma barra de velas para o símbolo e o intervalo fornecidos
    */
   void getCandlestickBars(String symbol, CandlestickInterval interval, Integer limit, Long startTime, Long endTime, BinanceApiCallback<List<Candlestick>> callback);
 
   /**
-   * Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.
-   *
-   * @see #getCandlestickBars(String, CandlestickInterval, BinanceApiCallback)
+   * Kline / barras de velas para um símbolo. Klines são identificados exclusivamente por seu tempo aberto.
+   *
+   * @see #getCandlestickBars (String, CandlestickInterval, BinanceApiCallback)
    */
   void getCandlestickBars(String symbol, CandlestickInterval interval, BinanceApiCallback<List<Candlestick>> callback);
 
   /**
-   * Get 24 hour price change statistics (asynchronous).
-   *
-   * @param symbol ticker symbol (e.g. ETHBTC)
-   * @param callback the callback that handles the response
+   * Obtenha estatísticas de alteração de preço de 24 horas (assíncrono).
+   *
+   * símbolo @param symbol ticker (por exemplo, ETHBTC)
+   * @param callback o retorno de chamada que lida com a resposta
    */
   void get24HrPriceStatistics(String symbol, BinanceApiCallback<TickerStatistics> callback);
   
   /**
-   * Get 24 hour price change statistics for all symbols (asynchronous).
-   * 
-   * @param callback the callback that handles the response
+   * Obtenha estatísticas de alteração de preço de 24 horas para todos os símbolos (assíncronos).
+   *
+   * @param callback o retorno de chamada que lida com a resposta
    */
    void getAll24HrPriceStatistics(BinanceApiCallback<List<TickerStatistics>> callback);
 
   /**
-   * Get Latest price for all symbols (asynchronous).
-   *
-   * @param callback the callback that handles the response
+   * Obtenha o preço mais recente para todos os símbolos (assíncronos).
+   *
+   * @param callback o retorno de chamada que lida com a resposta
    */
   void getAllPrices(BinanceApiCallback<List<TickerPrice>> callback);
   
   /**
-   * Get latest price for <code>symbol</code> (asynchronous).
-   * 
-   * @param symbol ticker symbol (e.g. ETHBTC)
-   * @param callback the callback that handles the response
+ * Obtenha o preço mais recente para o <code>symbol</code> (assíncrono).
+   *
+   * símbolo @param symbol ticker (por exemplo, ETHBTC)
+   * @param callback o retorno de chamada que lida com a resposta
    */
    void getPrice(String symbol , BinanceApiCallback<TickerPrice> callback);
 
   /**
-   * Get best price/qty on the order book for all symbols (asynchronous).
-   *
-   * @param callback the callback that handles the response
+   * Obtenha o melhor preço / qty no livro de ofertas para todos os símbolos (assíncronos).
+   *
+   * @param callback o retorno de chamada que lida com a resposta
    */
   void getBookTickers(BinanceApiCallback<List<BookTicker>> callback);
 
   // Account endpoints
 
   /**
-   * Send in a new order (asynchronous)
-   *
-   * @param order the new order to submit.
-   * @param callback the callback that handles the response
+   * Envie um novo pedido (assíncrono)
+   *
+   * @param solicite o novo pedido para enviar.
+   * @param callback o retorno de chamada que lida com a resposta
    */
   void newOrder(NewOrder order, BinanceApiCallback<NewOrderResponse> callback);
 
   /**
-   * Test new order creation and signature/recvWindow long. Creates and validates a new order but does not send it into the matching engine.
-   *
-   * @param order the new TEST order to submit.
-   * @param callback the callback that handles the response
+   * Teste a criação de novas encomendas e assinatura / recvWindow long. Cria e valida um novo pedido, mas não o envia para o mecanismo de correspondência.
+   *
+   * @param pede a nova ordem TEST para enviar.
+   * @param callback o retorno de chamada que lida com a resposta
    */
   void newOrderTest(NewOrder order, BinanceApiCallback<Void> callback);
 
   /**
-   * Check an order's status (asynchronous).
-   *
-   * @param orderStatusRequest order status request parameters
-   * @param callback the callback that handles the response
+   * Verifique o status de um pedido (assíncrono).
+   *
+   Parâmetros de solicitação de status do pedido @param orderStatusRequest
+   * @param callback o retorno de chamada que lida com a resposta
    */
   void getOrderStatus(OrderStatusRequest orderStatusRequest, BinanceApiCallback<Order> callback);
 
   /**
-   * Cancel an active order (asynchronous).
-   *
-   * @param cancelOrderRequest order status request parameters
-   * @param callback the callback that handles the response
+   * Cancelar um pedido ativo (assíncrono).
+   *
+   Parâmetros de solicitação de status do pedido @param cancelOrderRequest
+   * @param callback o retorno de chamada que lida com a resposta
    */
   void cancelOrder(CancelOrderRequest cancelOrderRequest, BinanceApiCallback<CancelOrderResponse> callback);
 
   /**
-   * Get all open orders on a symbol (asynchronous).
-   *
-   * @param orderRequest order request parameters
-   * @param callback the callback that handles the response
+  * Obter todos os pedidos em aberto em um símbolo (assíncrono).
+   *
+   Parâmetros de solicitação de pedido @param orderRequest
+   * @param callback o retorno de chamada que lida com a resposta
    */
   void getOpenOrders(OrderRequest orderRequest, BinanceApiCallback<List<Order>> callback);
 
   /**
-   * Get all account orders; active, canceled, or filled.
-   *
-   * @param orderRequest order request parameters
-   * @param callback the callback that handles the response
+  * Obter todos os pedidos de conta; ativo, cancelado ou preenchido.
+   *
+   * @param Parâmetros de solicitação de pedido orderRequest
+   * @param callback o retorno de chamada que lida com a resposta
    */
   void getAllOrders(AllOrdersRequest orderRequest, BinanceApiCallback<List<Order>> callback);
 
   /**
-   * Get current account information (async).
+   * Obter informações da conta atual (assíncrono).
    */
   void getAccount(Long recvWindow, Long timestamp, BinanceApiCallback<Account> callback);
 
   /**
-   * Get current account information using default parameters (async).
+   * Obter informações da conta atual usando os parâmetros padrão (assíncrono).
    */
   void getAccount(BinanceApiCallback<Account> callback);
 
   /**
-   * Get trades for a specific account and symbol.
-   *
-   * @param symbol symbol to get trades from
-   * @param limit default 500; max 1000
-   * @param fromId TradeId to fetch from. Default gets most recent trades.
-   * @param callback the callback that handles the response with a list of trades
+   * Obter negociações para uma conta e símbolo específicos.
+   *
+   * @param símbolo de símbolo para obter negociações de
+   * @param limite padrão 500; max 1000
+   * @param fromId TradeId para buscar. Padrão recebe as negociações mais recentes.
+   * @param callback o retorno de chamada que lida com a resposta com uma lista de negociações
    */
   void getMyTrades(String symbol, Integer limit, Long fromId, Long recvWindow, Long timestamp, BinanceApiCallback<List<Trade>> callback);
 
   /**
-   * Get trades for a specific account and symbol.
-   *
-   * @param symbol symbol to get trades from
-   * @param limit default 500; max 1000
-   * @param callback the callback that handles the response with a list of trades
+  * Obter negociações para uma conta e símbolo específicos.
+   *
+   * @param símbolo de símbolo para obter negociações de
+   * @param limite padrão 500; max 1000
+   * @param callback o retorno de chamada que lida com a resposta com uma lista de negociações
    */
   void getMyTrades(String symbol, Integer limit, BinanceApiCallback<List<Trade>> callback);
 
   /**
-   * Get trades for a specific account and symbol.
-   *
-   * @param symbol symbol to get trades from
-   * @param callback the callback that handles the response with a list of trades
+   * Obter negociações para uma conta e símbolo específicos.
+   *
+   * @param símbolo de símbolo para obter negociações de
+   * @param callback o retorno de chamada que lida com a resposta com uma lista de negociações
    */
   void getMyTrades(String symbol, BinanceApiCallback<List<Trade>> callback);
 
   /**
-   * Submit a withdraw request.
-   *
-   * Enable Withdrawals option has to be active in the API settings.
-   *
-   * @param asset asset symbol to withdraw
-   * @param address address to withdraw to
-   * @param amount amount to withdraw
-   * @param name description/alias of the address
-   * @param addressTag Secondary address identifier for coins like XRP,XMR etc.
+   * Envie uma solicitação de retirada.
+   *
+   * A opção Ativar retiradas deve estar ativa nas configurações da API.
+   *
+   * @param asset asset symbol para retirar
+   * @param endereço de endereço param para retirar a
+   * @param quantidade de quantia de param para retirar
+   * @param nome do nome do parame / apelido do endereço
+   * @param addressTag Identificador de endereço secundário para moedas como XRP, XMR etc.
    */
   void withdraw(String asset, String address, String amount, String name, String addressTag, BinanceApiCallback<WithdrawResult> callback);
 
   /**
-   * Fetch account deposit history.
-   *
-   * @param callback the callback that handles the response and returns the deposit history
+   * Buscar o histórico de depósitos da conta.
+   *
+   * @param callback o retorno de chamada que manipula a resposta e retorna o histórico de depósito
    */
   void getDepositHistory(String asset, BinanceApiCallback<DepositHistory> callback);
 
   /**
-   * Fetch account withdraw history.
-   *
-   * @param callback the callback that handles the response and returns the withdraw history
+   * Buscar o histórico de retirada da conta.
+   *
+   * @param callback o retorno de chamada que manipula a resposta e retorna o histórico de retirada
    */
   void getWithdrawHistory(String asset, BinanceApiCallback<WithdrawHistory> callback);
 
   /**
-   * Fetch deposit address.
-   *
-   * @param callback the callback that handles the response and returns the deposit address
+   * Buscar endereço de depósito.
+   *
+   * @param callback o retorno de chamada que manipula a resposta e retorna o endereço de depósito
    */
    void getDepositAddress(String asset, BinanceApiCallback<DepositAddress> callback);
 
   // User stream endpoints
 
   /**
-   * Start a new user data stream.
-   *
-   * @param callback the callback that handles the response which contains a listenKey
+  * Inicie um novo fluxo de dados do usuário.
+   *
+   * @param callback o retorno de chamada que lida com a resposta que contém um listenKey
    */
   void startUserDataStream(BinanceApiCallback<ListenKey> callback);
 
   /**
-   * PING a user data stream to prevent a time out.
-   *
-   * @param listenKey listen key that identifies a data stream
-   * @param callback the callback that handles the response which contains a listenKey
+   * PING um fluxo de dados do usuário para evitar um tempo limite.
+   *
+   * @param listenKey tecla de escuta que identifica um fluxo de dados
+   * @param callback o retorno de chamada que lida com a resposta que contém um listenKey
    */
   void keepAliveUserDataStream(String listenKey, BinanceApiCallback<Void> callback);
 
   /**
-   * Close out a new user data stream.
-   *
-   * @param listenKey listen key that identifies a data stream
-   * @param callback the callback that handles the response which contains a listenKey
+   * Feche um novo fluxo de dados do usuário.
+   *
+   * @param listenKey tecla de escuta que identifica um fluxo de dados
+   * @param callback o retorno de chamada que lida com a resposta que contém um listenKey
    */
   void closeUserDataStream(String listenKey, BinanceApiCallback<Void> callback);
 }

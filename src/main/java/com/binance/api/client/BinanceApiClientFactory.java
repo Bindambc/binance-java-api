@@ -7,7 +7,7 @@ import com.binance.api.client.impl.BinanceApiWebSocketClientImpl;
 import static com.binance.api.client.impl.BinanceApiServiceGenerator.getSharedClient;
 
 /**
- * A factory for creating BinanceApi client objects.
+ * Uma fábrica para criar objetos do cliente BinanceApi.
  */
 public class BinanceApiClientFactory {
 
@@ -45,29 +45,29 @@ public class BinanceApiClientFactory {
   }
 
   /**
-   * New instance without authentication.
+   * Nova instância sem autenticação.
    *
-   * @return the binance api client factory
+   * @return a fábrica do cliente binance api
    */
   public static BinanceApiClientFactory newInstance() {
     return new BinanceApiClientFactory(null, null);
   }
 
   /**
-   * Creates a new synchronous/blocking REST client.
+   * Cria um novo cliente REST síncrono / de bloqueio.
    */
   public BinanceApiRestClient newRestClient() {
     return new BinanceApiRestClientImpl(apiKey, secret);
   }
 
   /**
-   * Creates a new asynchronous/non-blocking REST client.
+   * Cria um novo cliente REST assíncrono / não bloqueador.
    */
   public BinanceApiAsyncRestClient newAsyncRestClient() {return new BinanceApiAsyncRestClientImpl(apiKey, secret);
   }
 
   /**
-   * Creates a new web socket client used for handling data streams.
+   * Cria um novo cliente de soquete da web usado para manipular fluxos de dados.
    */
   public BinanceApiWebSocketClient newWebSocketClient() {
     return new BinanceApiWebSocketClientImpl(getSharedClient());

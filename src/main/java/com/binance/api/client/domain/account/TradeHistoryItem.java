@@ -31,13 +31,15 @@ public class TradeHistoryItem {
     private long time;
 
     /**
-     * Is buyer maker ?
+     * Compra/Venda
+     * true -> vermelho
+     * false -> verde
      */
     @JsonProperty("isBuyerMaker")
     private boolean isBuyerMaker;
 
     /**
-     * Is best match ?
+     * É o melhor jogo ?
      */
     @JsonProperty("isBestMatch")
     private boolean isBestMatch;

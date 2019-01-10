@@ -3,15 +3,15 @@ package com.binance.api.client.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
- * Type of order to submit to the system.
+ * Tipo de pedido para enviar ao sistema.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public enum OrderType {
-  LIMIT,
-  MARKET,
-  STOP_LOSS,
-  STOP_LOSS_LIMIT,
-  TAKE_PROFIT,
-  TAKE_PROFIT_LIMIT,
-  LIMIT_MAKER
+  LIMIT, // LIMITE
+  MARKET, // MERCADO
+  STOP_LOSS, // PARAR A PERDA DE
+  STOP_LOSS_LIMIT, // PARAR O LIMITE DE PERDA
+  TAKE_PROFIT, // OBTER LUCROS
+  TAKE_PROFIT_LIMIT, // TOME O LIMITE DO LUCRO
+  LIMIT_MAKER // LIMITADOR
 }
